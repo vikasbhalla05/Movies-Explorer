@@ -3,12 +3,23 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Home from './pages/Home';
+import Movie from './pages/Movie';
+import Error from './pages/Error';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Home />,
+  },
+  {
+    path: "/movie/:id",
+    element: <Movie />,
+  },
+  {
+    path: "*",
+    element: <Error />,
   }
 ]);
 
