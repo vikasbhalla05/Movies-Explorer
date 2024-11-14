@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 
 // Function to fetch movie data
 const fetchMovies = async () => {
-    const response = await axios.get(`http://www.omdbapi.com/?i=tt3896198&apikey=${apiKey}`);
+    const response = await axios.get(`https://www.omdbapi.com/?apikey=${apiKey}&s=love`);
     return response.data;
 };
 
