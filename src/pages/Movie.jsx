@@ -5,7 +5,7 @@ import { useGlobalContext } from '../context/AppContext'
 
 const Movie = () => {
     let { id } = useParams()
-    const { name } = useGlobalContext()
+    const { name, movie: { movies, isLoading, error } } = useGlobalContext();
 
     return (
         <div>Movie {id} {name}</div>
