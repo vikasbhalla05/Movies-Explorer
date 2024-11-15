@@ -1,13 +1,18 @@
 import React from 'react';
 import { useGlobalContext } from '../context/AppContext';
 import MovieCard from '../components/MovieCard';
+import SearchBar from '../components/SearchBar';
 
 const Home = () => {
-    const { name, movie: { movies, isLoading, error } } = useGlobalContext();
+    const { name, movie: { movies, isLoading, error }, searchTerm, setsearchTerm } = useGlobalContext();
 
     return (
-        <div>
+        <div className='flex flex-col items-center'>
             <h1>Home</h1>
+
+            <SearchBar searchTerm={searchTerm} setsearchTerm={setsearchTerm} />
+
+            <h1>Search Result for {searchTerm}</h1>
 
             {/* Loading and Error States */}
             {isLoading && <p>Loading...</p>}
