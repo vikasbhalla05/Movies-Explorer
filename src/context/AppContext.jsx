@@ -12,15 +12,30 @@ const fetchMovies = async (term) => {
     return response.data;
 };
 
+const fetchMovieById = async (id) => {
+    const response = await axios.get(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`);
+    return response.data;
+};
+
 const AppContextProvider = ({ children }) => {
     const [searchTerm, setsearchTerm] = useState("love")
+    const [movieId, setMovieId] = useState("")
 
     const { data: movies, isLoading, error } = useQuery(['movies', searchTerm], () => fetchMovies(searchTerm), {
         keepPreviousData: true,
     });
 
+    const { data: singleMovie, isLoading: movieLoading, error: movieError } = useQuery(
+        ['movie', movieId],
+        () => fetchMovieById(movieId),
+        { enabled: !!movieId } // Only fetch when movieId is set
+    );
+
     return (
-        <AppContext.Provider value={{ name: "vikas", movie: { movies, isLoading, error }, searchTerm, setsearchTerm }}>
+        <AppContext.Provider value={{
+            name: "vikas", movie: { movies, isLoading, error }, searchTerm, setsearchTerm, singleMovie: { singleMovie, movieLoading, movieError }, movieId,
+            setMovieId,
+        }}>
             {children}
         </AppContext.Provider>
     );
